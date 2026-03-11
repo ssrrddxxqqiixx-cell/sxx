@@ -20,7 +20,7 @@ function Router() {
       <footer className="border-t border-white/10 bg-background/50 backdrop-blur py-8 mt-12">
         <div className="container mx-auto px-4 text-center">
           <p className="text-muted-foreground font-display tracking-widest text-sm">
-            © {new Date().getFullYear()} SERVER STORE. FIVE M ROLEPLAY STORE. NOT AFFILIATED WITH ROCKSTAR GAMES.
+            © {new Date().getFullYear()} 𝐔𝐀𝐀 𝐒𝐓𝐎𝐑𝐄. FIVE M ROLEPLAY STORE. NOT AFFILIATED WITH ROCKSTAR GAMES.
           </p>
         </div>
       </footer>

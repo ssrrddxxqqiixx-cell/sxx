@@ -36,8 +36,8 @@ export function Navbar() {
           <Link href="/">
             <div className="flex items-center gap-2 cursor-pointer group">
               <ShieldAlert className="w-8 h-8 text-primary group-hover:text-secondary transition-colors" />
-              <span className="font-display font-bold text-xl tracking-wider neon-text-purple uppercase">
-                Server Store
+              <span className="font-display font-bold text-xl tracking-wider neon-text-purple">
+                𝐔𝐀𝐀 𝐒𝐓𝐎𝐑𝐄
               </span>
             </div>
           </Link>
