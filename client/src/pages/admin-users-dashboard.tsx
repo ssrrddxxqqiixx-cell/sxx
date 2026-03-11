@@ -115,24 +115,24 @@ export default function AdminUsersDashboard() {
         
         <div className="flex-1 py-6 flex flex-col gap-2 px-4">
           <Link href="/admin/control-panel">
-            <a className="flex items-center gap-3 px-4 py-3 rounded-lg text-muted-foreground hover:text-white hover:bg-white/5 transition-colors">
+            <div className="flex items-center gap-3 px-4 py-3 rounded-lg text-muted-foreground hover:text-white hover:bg-white/5 transition-colors cursor-pointer">
               <LayoutDashboard className="w-5 h-5" />
               <span className="font-semibold">Control Panel</span>
-            </a>
+            </div>
           </Link>
           
           <Link href="/admin/dashboard">
-            <a className="flex items-center gap-3 px-4 py-3 rounded-lg text-muted-foreground hover:text-white hover:bg-white/5 transition-colors">
+            <div className="flex items-center gap-3 px-4 py-3 rounded-lg text-muted-foreground hover:text-white hover:bg-white/5 transition-colors cursor-pointer">
               <Package className="w-5 h-5" />
               <span className="font-semibold">Packages</span>
-            </a>
+            </div>
           </Link>
 
           <Link href="/admin-dashboard">
-            <a className="flex items-center gap-3 px-4 py-3 rounded-lg bg-primary/20 text-primary border border-primary/20 transition-colors">
+            <div className="flex items-center gap-3 px-4 py-3 rounded-lg bg-primary/20 text-primary border border-primary/20 transition-colors cursor-pointer">
               <Users className="w-5 h-5" />
               <span className="font-semibold">Users</span>
-            </a>
+            </div>
           </Link>
         </div>
 

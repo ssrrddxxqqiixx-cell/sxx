@@ -17,7 +17,7 @@ export default function AdminDashboard() {
 
   useEffect(() => {
     if (!authService.isAdmin()) {
-      setLocation("/admin/login");
+      setLocation("/admin-login");
       return;
     }
     const user = authService.getCurrentUser();
@@ -28,7 +28,7 @@ export default function AdminDashboard() {
 
   const handleLogout = () => {
     authService.logout();
-    setLocation("/admin/login");
+    setLocation("/admin-login");
   };
 
   const handleEdit = (pkg: Package) => {

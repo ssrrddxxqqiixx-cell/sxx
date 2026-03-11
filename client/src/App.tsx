@@ -1,4 +1,4 @@
-import { Switch, Route } from "wouter";
+import { Switch, Route, useLocation } from "wouter";
 import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
@@ -46,14 +46,33 @@ function PublicRouter() {
   );
 }
 
-function App() {
-  const isAdmin = typeof window !== "undefined" && (window.location.pathname.startsWith("/admin"));
+function MainRouter() {
+  const [location] = useLocation();
+  const isAdminRoute = location.startsWith("/admin");
+  const isHyphenAdminRoute = location.startsWith("/admin-");
   
+  if (isAdminRoute || isHyphenAdminRoute) {
+    return (
+      <Switch>
+        <Route path="/admin/login" component={AdminLogin} />
+        <Route path="/admin-login" component={AdminLogin} />
+        <Route path="/admin/control-panel" component={AdminControlPanel} />
+        <Route path="/admin/dashboard" component={AdminDashboard} />
+        <Route path="/admin-dashboard" component={AdminUsersDashboard} />
+        <Route component={NotFound} />
+      </Switch>
+    );
+  }
+  
+  return <PublicRouter />;
+}
+
+function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <Toaster />
-        {isAdmin ? <Router /> : <PublicRouter />}
+        <MainRouter />
       </TooltipProvider>
     </QueryClientProvider>
   );

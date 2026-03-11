@@ -33,7 +33,7 @@ export function Navbar() {
 
   const handleAdminLogin = () => {
     setLoginModalOpen(false);
-    setLocation("/admin/login");
+    setLocation("/admin-login");
   };
 
   const handleLogout = () => {

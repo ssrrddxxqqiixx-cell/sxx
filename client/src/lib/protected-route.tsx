@@ -16,7 +16,7 @@ export function ProtectedRoute({ children, requiredRole = "user" }: ProtectedRou
 
     // Not authenticated, redirect to login
     if (!isAuthenticated) {
-      setLocation("/admin/login");
+      setLocation("/admin-login");
       return;
     }
 
