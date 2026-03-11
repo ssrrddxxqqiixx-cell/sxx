@@ -5,9 +5,22 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { Navbar } from "@/components/layout/navbar";
 import Home from "@/pages/home";
+import AdminLogin from "@/pages/admin-login";
+import AdminDashboard from "@/pages/admin-dashboard";
 import NotFound from "@/pages/not-found";
 
 function Router() {
+  return (
+    <Switch>
+      <Route path="/" component={Home} />
+      <Route path="/admin/login" component={AdminLogin} />
+      <Route path="/admin/dashboard" component={AdminDashboard} />
+      <Route component={NotFound} />
+    </Switch>
+  );
+}
+
+function PublicRouter() {
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
@@ -29,11 +42,13 @@ function Router() {
 }
 
 function App() {
+  const isAdmin = typeof window !== "undefined" && (window.location.pathname.startsWith("/admin"));
+  
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <Toaster />
-        <Router />
+        {isAdmin ? <Router /> : <PublicRouter />}
       </TooltipProvider>
     </QueryClientProvider>
   );
