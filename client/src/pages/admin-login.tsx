@@ -3,6 +3,7 @@ import { useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Lock, LogIn } from "lucide-react";
+import { authService } from "@/lib/auth";
 import logo from "@assets/image_1773231247802.png";
 
 export default function AdminLogin() {
@@ -17,14 +18,7 @@ export default function AdminLogin() {
     setError("");
     setLoading(true);
 
-    // Mock admin credentials
-    const ADMIN_USERNAME = "admin";
-    const ADMIN_PASSWORD = "admin123";
-
-    if (username === ADMIN_USERNAME && password === ADMIN_PASSWORD) {
-      // Store admin session in localStorage
-      localStorage.setItem("adminToken", "mock-admin-token-" + Date.now());
-      localStorage.setItem("adminUsername", username);
+    if (authService.adminLogin(username, password)) {
       setLocation("/admin/control-panel");
     } else {
       setError("Invalid username or password");

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { LogOut, Package, Settings, Users, BarChart3 } from "lucide-react";
+import { authService } from "@/lib/auth";
 import logo from "@assets/image_1773231247802.png";
 
 export default function AdminControlPanel() {
@@ -9,18 +10,18 @@ export default function AdminControlPanel() {
   const [adminUsername, setAdminUsername] = useState("");
 
   useEffect(() => {
-    const token = localStorage.getItem("adminToken");
-    const username = localStorage.getItem("adminUsername");
-    if (!token || !username) {
+    if (!authService.isAdmin()) {
       setLocation("/admin/login");
       return;
     }
-    setAdminUsername(username);
+    const user = authService.getCurrentUser();
+    if (user) {
+      setAdminUsername(user.username);
+    }
   }, [setLocation]);
 
   const handleLogout = () => {
-    localStorage.removeItem("adminToken");
-    localStorage.removeItem("adminUsername");
+    authService.logout();
     setLocation("/admin/login");
   };
 

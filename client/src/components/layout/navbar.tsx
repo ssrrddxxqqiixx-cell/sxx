@@ -3,6 +3,7 @@ import { Link, useLocation } from "wouter";
 import { ShoppingCart, LogIn, LogOut, Menu, X, Shield } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
+import { authService } from "@/lib/auth";
 import logo from "@assets/image_1773231247802.png";
 
 export function Navbar() {

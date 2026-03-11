@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { LogOut, Plus, Trash2, Edit2 } from "lucide-react";
 import { packages as initialPackages, Package } from "@/lib/mock-data";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter, DialogDescription } from "@/components/ui/dialog";
+import { authService } from "@/lib/auth";
 import logo from "@assets/image_1773231247802.png";
 
 export default function AdminDashboard() {
@@ -15,19 +16,18 @@ export default function AdminDashboard() {
   const [adminUsername, setAdminUsername] = useState("");
 
   useEffect(() => {
-    // Check if user is logged in
-    const token = localStorage.getItem("adminToken");
-    const username = localStorage.getItem("adminUsername");
-    if (!token || !username) {
+    if (!authService.isAdmin()) {
       setLocation("/admin/login");
       return;
     }
-    setAdminUsername(username);
+    const user = authService.getCurrentUser();
+    if (user) {
+      setAdminUsername(user.username);
+    }
   }, [setLocation]);
 
   const handleLogout = () => {
-    localStorage.removeItem("adminToken");
-    localStorage.removeItem("adminUsername");
+    authService.logout();
     setLocation("/admin/login");
   };
 
