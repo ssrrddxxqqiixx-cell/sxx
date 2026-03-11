@@ -25,7 +25,7 @@ export default function AdminLogin() {
       // Store admin session in localStorage
       localStorage.setItem("adminToken", "mock-admin-token-" + Date.now());
       localStorage.setItem("adminUsername", username);
-      setLocation("/admin/dashboard");
+      setLocation("/admin/control-panel");
     } else {
       setError("Invalid username or password");
       setLoading(false);
