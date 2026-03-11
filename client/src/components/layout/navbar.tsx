@@ -36,8 +36,8 @@ export function Navbar() {
         <div className="flex items-center justify-between">
           <Link href="/">
             <div className="flex items-center gap-3 cursor-pointer group">
-              <img src={logo} alt="UAA Store" className="h-12 drop-shadow-[0_0_10px_rgba(176,38,255,0.4)] group-hover:drop-shadow-[0_0_15px_rgba(0,240,255,0.4)] transition-all" />
-              <span className="font-display font-bold text-xl tracking-wider neon-text-purple hidden sm:inline">
+              <img src={logo} alt="UAA Store" className="h-12 drop-shadow-[0_0_10px_rgba(128,128,128,0.4)] group-hover:drop-shadow-[0_0_15px_rgba(160,160,160,0.4)] transition-all" />
+              <span className="font-display font-bold text-xl tracking-wider neon-text-gray hidden sm:inline">
                 𝐔𝐀𝐀 𝐒𝐓𝐎𝐑𝐄
               </span>
             </div>

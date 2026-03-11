@@ -44,13 +44,13 @@ export default function Home() {
         </div>
         
         <div className="container relative z-10 mx-auto px-4 text-center">
-          <h1 className="text-5xl md:text-7xl font-display font-black text-white mb-6 tracking-widest uppercase neon-text-purple">
-            Level Up Your <br/><span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary neon-text-blue">Experience</span>
+          <h1 className="text-5xl md:text-7xl font-display font-black text-white mb-6 tracking-widest uppercase neon-text-gray">
+            With <span className="text-gray-400">UAA STORE</span>,<br/><span className="text-transparent bg-clip-text bg-gradient-to-r from-gray-400 to-gray-300">Live a Different Experience</span>
           </h1>
           <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 font-medium">
             Get exclusive packages, roles, and items for the ultimate roleplay session. Log in with Discord to claim your rewards instantly.
           </p>
-          <Button size="lg" className="h-14 px-8 text-lg bg-white text-black hover:bg-white/90 font-display font-bold uppercase tracking-widest neon-box-purple">
+          <Button size="lg" className="h-14 px-8 text-lg bg-white text-black hover:bg-white/90 font-display font-bold uppercase tracking-widest neon-box-gray">
             Browse Store
           </Button>
         </div>
@@ -72,7 +72,7 @@ export default function Home() {
                   onClick={() => setActiveCategory(cat)}
                   className={`px-4 py-2 rounded-full font-display text-sm font-bold tracking-wider whitespace-nowrap transition-all ${
                     activeCategory === cat 
-                      ? "bg-primary text-white neon-box-purple" 
+                      ? "bg-gray-600 text-white neon-box-gray" 
                       : "bg-card border border-white/10 text-muted-foreground hover:text-white hover:border-white/30"
                   }`}
                 >
@@ -93,7 +93,7 @@ export default function Home() {
 
       {/* Mock Checkout Dialog */}
       <Dialog open={isCheckingOut} onOpenChange={setIsCheckingOut}>
-        <DialogContent className="bg-card border-primary/20 neon-box-purple sm:max-w-md">
+        <DialogContent className="bg-card border-gray-600/20 neon-box-gray sm:max-w-md">
           {purchaseSuccess ? (
             <div className="flex flex-col items-center justify-center py-8 text-center animate-in zoom-in">
               <div className="w-16 h-16 rounded-full bg-green-500/20 flex items-center justify-center mb-4">
@@ -101,7 +101,7 @@ export default function Home() {
               </div>
               <DialogTitle className="text-2xl font-display text-white mb-2">Payment Successful!</DialogTitle>
               <p className="text-muted-foreground">
-                Your <span className="text-primary font-bold">{selectedPackage?.name}</span> has been applied to your account.
+                Your <span className="text-gray-400 font-bold">{selectedPackage?.name}</span> has been applied to your account.
               </p>
               <p className="text-xs text-muted-foreground mt-4 italic">
                 A Discord webhook has been triggered.

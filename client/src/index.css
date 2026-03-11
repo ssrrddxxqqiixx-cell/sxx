@@ -45,18 +45,18 @@
   --popover: 240 10% 4%;
   --popover-foreground: 0 0% 98%;
 
-  /* Neon Purple: #b026ff -> HSL ~278 100% 57% */
-  --primary: 278 100% 57%;
+  /* Gray: #808080 -> HSL ~0 0% 50% */
+  --primary: 0 0% 50%;
   --primary-foreground: 0 0% 100%;
 
-  /* Neon Cyan: #00f0ff -> HSL ~184 100% 50% */
-  --secondary: 184 100% 50%;
+  /* Gray accent: #A0A0A0 */
+  --secondary: 0 0% 63%;
   --secondary-foreground: 240 10% 4%;
 
   --muted: 240 5% 15%;
   --muted-foreground: 240 5% 65%;
 
-  --accent: 278 100% 57%;
+  --accent: 0 0% 50%;
   --accent-foreground: 0 0% 98%;
 
   --destructive: 0 84% 60%;
@@ -64,7 +64,7 @@
 
   --border: 240 10% 15%;
   --input: 240 10% 15%;
-  --ring: 278 100% 57%;
+  --ring: 0 0% 50%;
 
   --radius: 0.5rem;
 }
@@ -91,6 +91,10 @@
     text-shadow: 0 0 10px rgba(176, 38, 255, 0.5), 0 0 20px rgba(176, 38, 255, 0.3);
   }
   
+  .neon-text-gray {
+    text-shadow: 0 0 15px rgba(200, 200, 200, 0.4), 0 0 30px rgba(150, 150, 150, 0.2);
+  }
+  
   .neon-text-blue {
     text-shadow: 0 0 10px rgba(0, 240, 255, 0.5), 0 0 20px rgba(0, 240, 255, 0.3);
   }
@@ -100,6 +104,11 @@
     border-color: rgba(176, 38, 255, 0.5);
   }
   
+  .neon-border-gray {
+    box-shadow: 0 0 10px rgba(150, 150, 150, 0.2), inset 0 0 10px rgba(150, 150, 150, 0.1);
+    border-color: rgba(150, 150, 150, 0.5);
+  }
+  
   .neon-border-blue {
     box-shadow: 0 0 10px rgba(0, 240, 255, 0.2), inset 0 0 10px rgba(0, 240, 255, 0.1);
     border-color: rgba(0, 240, 255, 0.5);
@@ -107,6 +116,10 @@
 
   .neon-box-purple {
     box-shadow: 0 0 15px rgba(176, 38, 255, 0.4), inset 0 0 15px rgba(176, 38, 255, 0.2);
+  }
+
+  .neon-box-gray {
+    box-shadow: 0 0 15px rgba(150, 150, 150, 0.3), inset 0 0 15px rgba(150, 150, 150, 0.15);
   }
   
   .glass-panel {
