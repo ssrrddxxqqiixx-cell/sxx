@@ -41,6 +41,74 @@ export const authService = {
     localStorage.setItem(STORAGE_KEYS.USER_DATA, JSON.stringify(mockUser));
   },
 
+  // Register new user
+  registerUser: (username: string, email: string, password: string): boolean => {
+    try {
+      const usersData = localStorage.getItem("uaa_store_users") || "[]";
+      const users = JSON.parse(usersData);
+      
+      // Check if user exists
+      const userExists = users.some((u: any) => u.username === username || u.email === email);
+      if (userExists) return false;
+      
+      // Add new user
+      const newUser = {
+        id: "user-" + Date.now(),
+        username,
+        email,
+        password, // In a real app this would be hashed
+        avatar: `https://api.dicebear.com/7.x/avataaars/svg?seed=${username}`,
+        createdAt: new Date().toISOString()
+      };
+      
+      users.push(newUser);
+      localStorage.setItem("uaa_store_users", JSON.stringify(users));
+      
+      // Also add to admin dashboard user list if needed
+      const adminUsersData = localStorage.getItem("admin_managed_users") || "[]";
+      const adminUsers = JSON.parse(adminUsersData);
+      adminUsers.push({
+        id: newUser.id,
+        username: newUser.username,
+        email: newUser.email,
+        role: "user",
+        createdAt: newUser.createdAt
+      });
+      localStorage.setItem("admin_managed_users", JSON.stringify(adminUsers));
+      
+      return true;
+    } catch (e) {
+      console.error("Failed to register user", e);
+      return false;
+    }
+  },
+
+  // Login with credentials
+  userLoginWithCredentials: (username: string, password: string): boolean => {
+    try {
+      const usersData = localStorage.getItem("uaa_store_users") || "[]";
+      const users = JSON.parse(usersData);
+      
+      const user = users.find((u: any) => u.username === username && u.password === password);
+      
+      if (user) {
+        localStorage.setItem(STORAGE_KEYS.USER_ROLE, "user");
+        localStorage.setItem(STORAGE_KEYS.USER_TOKEN, "mock-user-token-" + Date.now());
+        localStorage.setItem(STORAGE_KEYS.USER_DATA, JSON.stringify({
+          id: user.id,
+          username: user.username,
+          email: user.email,
+          avatar: user.avatar
+        }));
+        return true;
+      }
+      return false;
+    } catch (e) {
+      console.error("Failed to login", e);
+      return false;
+    }
+  },
+
   // Get current user role
   getUserRole: (): UserRole => {
     return (localStorage.getItem(STORAGE_KEYS.USER_ROLE) as UserRole) || null;

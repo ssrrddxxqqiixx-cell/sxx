@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "wouter";
-import { ShoppingCart, LogIn, LogOut, Menu, X, Shield } from "lucide-react";
+import { ShoppingCart, LogIn, LogOut, Menu, X, Shield, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { authService } from "@/lib/auth";
+import { cartService } from "@/lib/cart";
 import logo from "@assets/image_1773231247802.png";
 
 export function Navbar() {
@@ -12,22 +13,43 @@ export function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [loginModalOpen, setLoginModalOpen] = useState(false);
   const [user, setUser] = useState<{ username: string; avatar: string; id: string } | null>(null);
+  const [cartCount, setCartCount] = useState(0);
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
     };
     window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    
+    // Check auth status
+    if (authService.isAuthenticated() && authService.isUser()) {
+      const currentUser = authService.getCurrentUser();
+      if (currentUser) {
+        setUser({
+          username: currentUser.username,
+          avatar: currentUser.avatar || "https://api.dicebear.com/7.x/avataaars/svg?seed=User",
+          id: currentUser.id
+        });
+      }
+    }
+    
+    // Initialize cart count
+    setCartCount(cartService.getItemCount());
+    
+    // Listen for cart updates
+    const handleCartUpdate = () => {
+      setCartCount(cartService.getItemCount());
+    };
+    window.addEventListener('cartUpdated', handleCartUpdate);
+    
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener('cartUpdated', handleCartUpdate);
+    };
   }, []);
 
   const handleRegularUserLogin = () => {
-    // Mock Discord Login
-    setUser({
-      username: "GamerPro99",
-      avatar: "https://cdn.discordapp.com/embed/avatars/1.png",
-      id: "123456789012345678"
-    });
+    setLocation("/login");
     setLoginModalOpen(false);
   };
 
@@ -37,7 +59,9 @@ export function Navbar() {
   };
 
   const handleLogout = () => {
+    authService.logout();
     setUser(null);
+    setLocation("/");
   };
 
   return (
@@ -62,6 +86,17 @@ export function Navbar() {
             </div>
 
             <div className="flex items-center gap-4">
+              <Link href="/cart">
+                <Button variant="ghost" size="icon" className="relative text-gray-400 hover:text-white">
+                  <ShoppingCart className="w-5 h-5" />
+                  {cartCount > 0 && (
+                    <span className="absolute -top-1 -right-1 w-5 h-5 bg-red-500 rounded-full text-[10px] font-bold text-white flex items-center justify-center border-2 border-background">
+                      {cartCount}
+                    </span>
+                  )}
+                </Button>
+              </Link>
+              
               <a href="https://discord.gg/tHUYCcmFwx" target="_blank" rel="noopener noreferrer">
                 <Button variant="outline" className="border-primary/50 text-primary hover:bg-primary/20 hover:text-white transition-all uppercase font-bold tracking-wider">
                   Join Discord
@@ -69,15 +104,19 @@ export function Navbar() {
               </a>
               
               {user ? (
-                <div className="flex items-center gap-3 bg-card/50 border border-white/10 rounded-full pl-2 pr-4 py-1">
-                  <img src={user.avatar} alt="Avatar" className="w-8 h-8 rounded-full border border-primary/50" />
-                  <span className="font-bold text-sm">{user.username}</span>
-                  <button onClick={handleLogout} className="text-muted-foreground hover:text-gray-400 ml-2" data-testid="button-logout-navbar">
+                <div className="flex items-center gap-3">
+                  <Link href="/account">
+                    <div className="flex items-center gap-3 bg-card/50 border border-white/10 rounded-full pl-2 pr-4 py-1 cursor-pointer hover:bg-white/5 transition-colors">
+                      <img src={user.avatar} alt="Avatar" className="w-8 h-8 rounded-full border border-primary/50" />
+                      <span className="font-bold text-sm text-white">{user.username}</span>
+                    </div>
+                  </Link>
+                  <button onClick={handleLogout} className="text-muted-foreground hover:text-gray-400 p-2" title="Log out">
                     <LogOut className="w-4 h-4" />
                   </button>
                 </div>
               ) : (
-                <Button onClick={() => setLoginModalOpen(true)} className="bg-gray-700 hover:bg-gray-600 text-white font-bold uppercase tracking-wider gap-2" data-testid="button-login-navbar">
+                <Button onClick={() => setLocation("/login")} className="bg-gray-700 hover:bg-gray-600 text-white font-bold uppercase tracking-wider gap-2">
                   <LogIn className="w-4 h-4" />
                   Login
                 </Button>
@@ -102,20 +141,41 @@ export function Navbar() {
           <div className="h-px bg-white/10 my-2" />
           
           {user ? (
-            <div className="flex items-center justify-between p-2">
-              <div className="flex items-center gap-3">
+            <div className="flex flex-col gap-2 p-2">
+              <div className="flex items-center gap-3 mb-2">
                 <img src={user.avatar} alt="Avatar" className="w-8 h-8 rounded-full" />
                 <span className="font-bold">{user.username}</span>
               </div>
-              <Button variant="ghost" size="icon" onClick={handleLogout} data-testid="button-logout-mobile">
-                <LogOut className="w-5 h-5 text-gray-400" />
+              <Link href="/account">
+                <Button variant="ghost" className="w-full justify-start text-white hover:bg-white/5">
+                  <User className="w-4 h-4 mr-2" />
+                  My Account
+                </Button>
+              </Link>
+              <Link href="/cart">
+                <Button variant="ghost" className="w-full justify-start text-white hover:bg-white/5">
+                  <ShoppingCart className="w-4 h-4 mr-2" />
+                  Cart ({cartCount})
+                </Button>
+              </Link>
+              <Button variant="ghost" className="w-full justify-start text-red-400 hover:text-red-300 hover:bg-red-500/10" onClick={handleLogout}>
+                <LogOut className="w-4 h-4 mr-2" />
+                Logout
               </Button>
             </div>
           ) : (
-            <Button onClick={() => setLoginModalOpen(true)} className="w-full bg-gray-700 hover:bg-gray-600 text-white font-bold uppercase gap-2" data-testid="button-login-mobile">
-              <LogIn className="w-4 h-4" />
-              Login
-            </Button>
+            <div className="flex flex-col gap-2 p-2">
+              <Link href="/cart">
+                <Button variant="ghost" className="w-full justify-start text-white hover:bg-white/5">
+                  <ShoppingCart className="w-4 h-4 mr-2" />
+                  Cart ({cartCount})
+                </Button>
+              </Link>
+              <Button onClick={() => setLocation("/login")} className="w-full bg-gray-700 hover:bg-gray-600 text-white font-bold uppercase gap-2">
+                <LogIn className="w-4 h-4" />
+                Login
+              </Button>
+            </div>
           )}
         </div>
       )}

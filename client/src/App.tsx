@@ -9,6 +9,11 @@ import AdminLogin from "@/pages/admin-login";
 import AdminControlPanel from "@/pages/admin-control-panel";
 import AdminDashboard from "@/pages/admin-dashboard";
 import AdminUsersDashboard from "@/pages/admin-users-dashboard";
+import Register from "@/pages/register";
+import Login from "@/pages/login";
+import Account from "@/pages/account";
+import Cart from "@/pages/cart";
+import Checkout from "@/pages/checkout";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -32,6 +37,11 @@ function PublicRouter() {
       <main className="flex-1">
         <Switch>
           <Route path="/" component={Home} />
+          <Route path="/register" component={Register} />
+          <Route path="/login" component={Login} />
+          <Route path="/account" component={Account} />
+          <Route path="/cart" component={Cart} />
+          <Route path="/checkout" component={Checkout} />
           <Route component={NotFound} />
         </Switch>
       </main>

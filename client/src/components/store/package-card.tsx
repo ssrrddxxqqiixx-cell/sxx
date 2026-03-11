@@ -2,6 +2,8 @@ import { Package } from "@/lib/mock-data";
 import { Button } from "@/components/ui/button";
 import { ShoppingCart } from "lucide-react";
 import crateImg from "@/assets/images/package-crate.png";
+import { cartService } from "@/lib/cart";
+import { useToast } from "@/hooks/use-toast";
 
 interface PackageCardProps {
   pkg: Package;
@@ -9,8 +11,19 @@ interface PackageCardProps {
 }
 
 export function PackageCard({ pkg, onBuy }: PackageCardProps) {
+  const { toast } = useToast();
+
+  const handleAddToCart = () => {
+    cartService.addItem(pkg);
+    toast({
+      title: "Added to Cart",
+      description: `${pkg.name} has been added to your cart.`,
+      duration: 3000,
+    });
+  };
+
   return (
-    <div className="group relative rounded-xl overflow-hidden glass-panel border-white/10 hover:neon-border-gray transition-all duration-500 hover:-translate-y-2">
+    <div className="group relative rounded-xl overflow-hidden glass-panel border-white/10 hover:neon-border-gray transition-all duration-500 hover:-translate-y-2 flex flex-col h-full">
       {/* Glow effect behind card */}
       <div className="absolute -inset-0.5 bg-gradient-to-r from-gray-500 to-gray-400 opacity-0 group-hover:opacity-20 blur transition-opacity duration-500 rounded-xl" />
       
@@ -34,7 +47,7 @@ export function PackageCard({ pkg, onBuy }: PackageCardProps) {
           {pkg.name}
         </h3>
         
-        <p className="text-muted-foreground text-sm flex-grow mb-6 line-clamp-2">
+        <p className="text-muted-foreground text-sm flex-grow mb-6">
           {pkg.description}
         </p>
         
@@ -43,11 +56,11 @@ export function PackageCard({ pkg, onBuy }: PackageCardProps) {
             ${pkg.price.toFixed(2)}
           </div>
           <Button 
-            onClick={() => onBuy(pkg)}
+            onClick={handleAddToCart}
             className="bg-gray-600 hover:bg-gray-500 text-white font-bold tracking-wider uppercase"
           >
             <ShoppingCart className="w-4 h-4 mr-2" />
-            Buy Now
+            Add to Cart
           </Button>
         </div>
       </div>
