@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import { Link } from "wouter";
-import { ShoppingCart, LogIn, LogOut, Menu, X, ShieldAlert } from "lucide-react";
+import { ShoppingCart, LogIn, LogOut, Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import logo from "@assets/image_1773231247802.png";
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -34,9 +35,9 @@ export function Navbar() {
       <div className="container mx-auto px-4 md:px-6">
         <div className="flex items-center justify-between">
           <Link href="/">
-            <div className="flex items-center gap-2 cursor-pointer group">
-              <ShieldAlert className="w-8 h-8 text-primary group-hover:text-secondary transition-colors" />
-              <span className="font-display font-bold text-xl tracking-wider neon-text-purple">
+            <div className="flex items-center gap-3 cursor-pointer group">
+              <img src={logo} alt="UAA Store" className="h-12 drop-shadow-[0_0_10px_rgba(176,38,255,0.4)] group-hover:drop-shadow-[0_0_15px_rgba(0,240,255,0.4)] transition-all" />
+              <span className="font-display font-bold text-xl tracking-wider neon-text-purple hidden sm:inline">
                 𝐔𝐀𝐀 𝐒𝐓𝐎𝐑𝐄
               </span>
             </div>
