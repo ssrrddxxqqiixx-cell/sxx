@@ -47,9 +47,6 @@ export default function Home() {
           <h1 className="text-5xl md:text-7xl font-display font-black text-white mb-6 tracking-widest uppercase neon-text-gray">
             With <span className="text-gray-400">UAA STORE</span>,<br/><span className="text-transparent bg-clip-text bg-gradient-to-r from-gray-400 to-gray-300">Live a Different Experience</span>
           </h1>
-          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 font-medium">
-            Get exclusive packages, roles, and items for the ultimate roleplay session. Log in with Discord to claim your rewards instantly.
-          </p>
           <Button size="lg" className="h-14 px-8 text-lg bg-white text-black hover:bg-white/90 font-display font-bold uppercase tracking-widest neon-box-gray">
             Browse Store
           </Button>
