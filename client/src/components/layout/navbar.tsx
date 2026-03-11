@@ -48,14 +48,16 @@ export function Navbar() {
             <div className="flex items-center gap-6 font-semibold tracking-wide">
               <Link href="/"><span className="text-foreground/80 hover:text-white transition-colors cursor-pointer uppercase text-sm">Home</span></Link>
               <Link href="/"><span className="text-primary hover:text-white transition-colors cursor-pointer uppercase text-sm">Store</span></Link>
-              <a href="#" className="text-foreground/80 hover:text-[#5865F2] transition-colors cursor-pointer uppercase text-sm">Discord</a>
+              <a href="https://discord.gg/tHUYCcmFwx" target="_blank" rel="noopener noreferrer" className="text-foreground/80 hover:text-[#5865F2] transition-colors cursor-pointer uppercase text-sm">Discord</a>
               <a href="#" className="text-foreground/80 hover:text-white transition-colors cursor-pointer uppercase text-sm">Support</a>
             </div>
 
             <div className="flex items-center gap-4">
-              <Button variant="outline" className="border-primary/50 text-primary hover:bg-primary/20 hover:text-white transition-all uppercase font-bold tracking-wider">
-                Join Discord
-              </Button>
+              <a href="https://discord.gg/tHUYCcmFwx" target="_blank" rel="noopener noreferrer">
+                <Button variant="outline" className="border-primary/50 text-primary hover:bg-primary/20 hover:text-white transition-all uppercase font-bold tracking-wider">
+                  Join Discord
+                </Button>
+              </a>
               
               {user ? (
                 <div className="flex items-center gap-3 bg-card/50 border border-white/10 rounded-full pl-2 pr-4 py-1">
@@ -86,7 +88,7 @@ export function Navbar() {
         <div className="md:hidden absolute top-full left-0 w-full bg-background border-b border-white/10 p-4 flex flex-col gap-4 animate-in slide-in-from-top-2">
           <Link href="/"><span className="block p-2 text-white font-bold">Home</span></Link>
           <Link href="/"><span className="block p-2 text-primary font-bold">Store</span></Link>
-          <a href="#" className="block p-2 text-white font-bold">Discord</a>
+          <a href="https://discord.gg/tHUYCcmFwx" target="_blank" rel="noopener noreferrer" className="block p-2 text-white font-bold">Discord</a>
           <a href="#" className="block p-2 text-white font-bold">Support</a>
           
           <div className="h-px bg-white/10 my-2" />
