@@ -4,7 +4,7 @@ import { PackageCard } from "@/components/store/package-card";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from "@/components/ui/dialog";
 import { CheckCircle2, CreditCard } from "lucide-react";
-import heroBg from "@/assets/images/hero-bg.png";
+import heroBg from "@assets/image_1773231699063.png";
 
 export default function Home() {
   const [activeCategory, setActiveCategory] = useState<string>("All");
