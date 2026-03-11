@@ -90,7 +90,7 @@ export default function AdminDashboard() {
           </div>
           <div className="flex items-center gap-4">
             <span className="text-gray-300 font-medium">Welcome, <span className="text-gray-400 font-bold">{adminUsername}</span></span>
-            <Button onClick={handleLogout} variant="outline" className="border-red-600/30 text-red-400 hover:bg-red-500/10 gap-2" data-testid="button-logout">
+            <Button onClick={handleLogout} variant="outline" className="border-gray-600/50 text-gray-300 hover:bg-gray-600/20 gap-2" data-testid="button-logout">
               <LogOut className="w-4 h-4" />
               Logout
             </Button>
@@ -102,7 +102,7 @@ export default function AdminDashboard() {
         {/* Actions Bar */}
         <div className="flex items-center justify-between mb-8">
           <h2 className="text-2xl font-display font-bold text-white tracking-wider">Package Management</h2>
-          <Button onClick={handleAddNew} className="bg-gray-600 hover:bg-gray-500 text-white font-bold gap-2 uppercase tracking-wider" data-testid="button-add-package">
+          <Button onClick={handleAddNew} className="bg-gray-700 hover:bg-gray-600 text-white font-bold gap-2 uppercase tracking-wider" data-testid="button-add-package">
             <Plus className="w-5 h-5" />
             Add Package
           </Button>
@@ -136,7 +136,7 @@ export default function AdminDashboard() {
                           onClick={() => handleEdit(pkg)}
                           size="icon"
                           variant="outline"
-                          className="border-gray-600/30 text-gray-300 hover:bg-gray-600/20"
+                          className="border-gray-600/50 text-gray-400 hover:bg-gray-600/20"
                           data-testid={`button-edit-package-${pkg.id}`}
                         >
                           <Edit2 className="w-4 h-4" />
@@ -145,7 +145,7 @@ export default function AdminDashboard() {
                           onClick={() => handleDelete(pkg.id)}
                           size="icon"
                           variant="outline"
-                          className="border-red-600/30 text-red-400 hover:bg-red-500/10"
+                          className="border-gray-700/50 text-gray-500 hover:bg-gray-700/20"
                           data-testid={`button-delete-package-${pkg.id}`}
                         >
                           <Trash2 className="w-4 h-4" />
@@ -180,7 +180,7 @@ export default function AdminDashboard() {
                 <Input
                   value={editingPackage.name}
                   onChange={(e) => setEditingPackage({ ...editingPackage, name: e.target.value })}
-                  className="bg-background border-gray-600/30"
+                  className="bg-gray-950 border-gray-600/50 text-white focus:border-gray-500"
                   data-testid="input-package-name"
                 />
               </div>
@@ -191,7 +191,7 @@ export default function AdminDashboard() {
                   <Input
                     value={editingPackage.category}
                     onChange={(e) => setEditingPackage({ ...editingPackage, category: e.target.value })}
-                    className="bg-background border-gray-600/30"
+                    className="bg-gray-950 border-gray-600/50 text-white focus:border-gray-500"
                     data-testid="input-package-category"
                   />
                 </div>
@@ -201,7 +201,7 @@ export default function AdminDashboard() {
                     type="number"
                     value={editingPackage.price}
                     onChange={(e) => setEditingPackage({ ...editingPackage, price: parseFloat(e.target.value) })}
-                    className="bg-background border-gray-600/30"
+                    className="bg-gray-950 border-gray-600/50 text-white focus:border-gray-500"
                     data-testid="input-package-price"
                   />
                 </div>
@@ -212,7 +212,7 @@ export default function AdminDashboard() {
                 <Input
                   value={editingPackage.description}
                   onChange={(e) => setEditingPackage({ ...editingPackage, description: e.target.value })}
-                  className="bg-background border-gray-600/30"
+                  className="bg-gray-950 border-gray-600/50 text-white focus:border-gray-500"
                   data-testid="input-package-description"
                 />
               </div>
@@ -222,7 +222,7 @@ export default function AdminDashboard() {
               <Button
                 variant="outline"
                 onClick={() => setIsModalOpen(false)}
-                className="border-gray-600/30"
+                className="border-gray-600/50 text-gray-300 hover:bg-gray-600/20"
               >
                 Cancel
               </Button>
@@ -234,7 +234,7 @@ export default function AdminDashboard() {
                     handleSaveNew();
                   }
                 }}
-                className="bg-gray-600 hover:bg-gray-500"
+                className="bg-gray-700 hover:bg-gray-600"
                 data-testid="button-save-package"
               >
                 Save

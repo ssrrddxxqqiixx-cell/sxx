@@ -64,7 +64,7 @@ export default function AdminLogin() {
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
                 placeholder="Enter username"
-                className="bg-card border-gray-600/30 text-white placeholder:text-gray-600 focus:border-gray-400"
+                className="bg-gray-950 border-gray-600/50 text-white placeholder:text-gray-500 focus:border-gray-500"
                 disabled={loading}
                 data-testid="input-admin-username"
               />
@@ -80,7 +80,7 @@ export default function AdminLogin() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Enter password"
-                className="bg-card border-gray-600/30 text-white placeholder:text-gray-600 focus:border-gray-400"
+                className="bg-gray-950 border-gray-600/50 text-white placeholder:text-gray-500 focus:border-gray-500"
                 disabled={loading}
                 data-testid="input-admin-password"
               />
@@ -104,7 +104,7 @@ export default function AdminLogin() {
             <Button
               type="submit"
               disabled={loading || !username || !password}
-              className="w-full h-12 bg-gray-600 hover:bg-gray-500 text-white font-display font-bold uppercase tracking-widest gap-2"
+              className="w-full h-12 bg-gray-700 hover:bg-gray-600 text-white font-display font-bold uppercase tracking-widest gap-2"
               data-testid="button-login-submit"
             >
               <LogIn className="w-5 h-5" />
