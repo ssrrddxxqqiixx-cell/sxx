@@ -14,7 +14,7 @@ export function PackageCard({ pkg, onBuy }: PackageCardProps) {
       {/* Glow effect behind card */}
       <div className="absolute -inset-0.5 bg-gradient-to-r from-gray-500 to-gray-400 opacity-0 group-hover:opacity-20 blur transition-opacity duration-500 rounded-xl" />
       
-      <div className="relative h-full flex flex-col p-6 z-10 bg-card/90">
+      <div className="relative h-full flex flex-col p-6 z-10 bg-gray-900/80">
         <div className="flex justify-center mb-6 relative">
           <div className="absolute inset-0 bg-gray-500/20 blur-xl rounded-full" />
           <img 

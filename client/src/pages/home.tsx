@@ -60,10 +60,6 @@ export default function Home() {
       <section className="py-20 relative">
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row justify-between items-center mb-12 gap-6">
-            <h2 className="text-3xl font-display font-bold uppercase tracking-wider">
-              Featured <span className="text-primary">Packages</span>
-            </h2>
-            
             {/* Category Filter */}
             <div className="flex overflow-x-auto pb-2 w-full md:w-auto gap-2 scrollbar-hide no-scrollbar">
               {categories.map(cat => (
