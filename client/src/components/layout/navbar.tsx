@@ -57,7 +57,6 @@ export function Navbar() {
             <div className="flex items-center gap-6 font-semibold tracking-wide">
               <Link href="/"><span className="text-foreground/80 hover:text-white transition-colors cursor-pointer uppercase text-sm">Home</span></Link>
               <Link href="/"><span className="text-primary hover:text-white transition-colors cursor-pointer uppercase text-sm">Store</span></Link>
-              <a href="https://discord.gg/tHUYCcmFwx" target="_blank" rel="noopener noreferrer" className="text-foreground/80 hover:text-[#5865F2] transition-colors cursor-pointer uppercase text-sm">Discord</a>
               <a href="https://discord.gg/tHUYCcmFwx" target="_blank" rel="noopener noreferrer" className="text-foreground/80 hover:text-white transition-colors cursor-pointer uppercase text-sm">Support</a>
             </div>
 
@@ -97,7 +96,6 @@ export function Navbar() {
         <div className="md:hidden absolute top-full left-0 w-full bg-background border-b border-white/10 p-4 flex flex-col gap-4 animate-in slide-in-from-top-2">
           <Link href="/"><span className="block p-2 text-white font-bold">Home</span></Link>
           <Link href="/"><span className="block p-2 text-primary font-bold">Store</span></Link>
-          <a href="https://discord.gg/tHUYCcmFwx" target="_blank" rel="noopener noreferrer" className="block p-2 text-white font-bold">Discord</a>
           <a href="https://discord.gg/tHUYCcmFwx" target="_blank" rel="noopener noreferrer" className="block p-2 text-white font-bold">Support</a>
           
           <div className="h-px bg-white/10 my-2" />
