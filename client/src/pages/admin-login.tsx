@@ -19,7 +19,7 @@ export default function AdminLogin() {
     setLoading(true);
 
     if (authService.adminLogin(username, password)) {
-      setLocation("/admin/control-panel");
+      setLocation("/admin-dashboard");
     } else {
       setError("Invalid username or password");
       setLoading(false);

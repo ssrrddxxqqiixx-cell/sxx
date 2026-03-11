@@ -55,7 +55,7 @@ export default function AdminControlPanel() {
       title: "User Management",
       description: "Manage users, roles, and access permissions",
       icon: Users,
-      action: () => alert("User management coming soon"),
+      action: () => setLocation("/admin-dashboard"),
       color: "bg-gray-600 hover:bg-gray-500",
     },
   ];
