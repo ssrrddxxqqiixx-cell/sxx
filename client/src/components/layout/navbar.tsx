@@ -1,12 +1,15 @@
 import { useState, useEffect } from "react";
-import { Link } from "wouter";
-import { ShoppingCart, LogIn, LogOut, Menu, X } from "lucide-react";
+import { Link, useLocation } from "wouter";
+import { ShoppingCart, LogIn, LogOut, Menu, X, Shield } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import logo from "@assets/image_1773231247802.png";
 
 export function Navbar() {
+  const [, setLocation] = useLocation();
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [loginModalOpen, setLoginModalOpen] = useState(false);
   const [user, setUser] = useState<{ username: string; avatar: string; id: string } | null>(null);
 
   useEffect(() => {
@@ -17,13 +20,19 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const handleDiscordLogin = () => {
+  const handleRegularUserLogin = () => {
     // Mock Discord Login
     setUser({
       username: "GamerPro99",
       avatar: "https://cdn.discordapp.com/embed/avatars/1.png",
       id: "123456789012345678"
     });
+    setLoginModalOpen(false);
+  };
+
+  const handleAdminLogin = () => {
+    setLoginModalOpen(false);
+    setLocation("/admin/login");
   };
 
   const handleLogout = () => {
@@ -63,14 +72,14 @@ export function Navbar() {
                 <div className="flex items-center gap-3 bg-card/50 border border-white/10 rounded-full pl-2 pr-4 py-1">
                   <img src={user.avatar} alt="Avatar" className="w-8 h-8 rounded-full border border-primary/50" />
                   <span className="font-bold text-sm">{user.username}</span>
-                  <button onClick={handleLogout} className="text-muted-foreground hover:text-destructive ml-2">
+                  <button onClick={handleLogout} className="text-muted-foreground hover:text-gray-400 ml-2" data-testid="button-logout-navbar">
                     <LogOut className="w-4 h-4" />
                   </button>
                 </div>
               ) : (
-                <Button onClick={handleDiscordLogin} className="bg-[#5865F2] hover:bg-[#4752C4] text-white font-bold uppercase tracking-wider gap-2">
+                <Button onClick={() => setLoginModalOpen(true)} className="bg-gray-700 hover:bg-gray-600 text-white font-bold uppercase tracking-wider gap-2" data-testid="button-login-navbar">
                   <LogIn className="w-4 h-4" />
-                  Login with Discord
+                  Login
                 </Button>
               )}
             </div>
@@ -99,18 +108,50 @@ export function Navbar() {
                 <img src={user.avatar} alt="Avatar" className="w-8 h-8 rounded-full" />
                 <span className="font-bold">{user.username}</span>
               </div>
-              <Button variant="ghost" size="icon" onClick={handleLogout}>
-                <LogOut className="w-5 h-5 text-destructive" />
+              <Button variant="ghost" size="icon" onClick={handleLogout} data-testid="button-logout-mobile">
+                <LogOut className="w-5 h-5 text-gray-400" />
               </Button>
             </div>
           ) : (
-            <Button onClick={handleDiscordLogin} className="w-full bg-[#5865F2] hover:bg-[#4752C4] text-white font-bold uppercase gap-2">
+            <Button onClick={() => setLoginModalOpen(true)} className="w-full bg-gray-700 hover:bg-gray-600 text-white font-bold uppercase gap-2" data-testid="button-login-mobile">
               <LogIn className="w-4 h-4" />
-              Login with Discord
+              Login
             </Button>
           )}
         </div>
       )}
+
+      {/* Login Modal */}
+      <Dialog open={loginModalOpen} onOpenChange={setLoginModalOpen}>
+        <DialogContent className="bg-card border-gray-600/20 sm:max-w-md" data-testid="dialog-login-options">
+          <DialogHeader>
+            <DialogTitle className="font-display text-2xl tracking-wider">Choose Login Type</DialogTitle>
+            <DialogDescription>
+              Select how you'd like to log in to the store.
+            </DialogDescription>
+          </DialogHeader>
+
+          <div className="space-y-4">
+            <Button
+              onClick={handleRegularUserLogin}
+              className="w-full h-12 bg-gray-700 hover:bg-gray-600 text-white font-bold uppercase tracking-wider gap-2 flex items-center justify-center"
+              data-testid="button-login-user"
+            >
+              <LogIn className="w-5 h-5" />
+              Login as User
+            </Button>
+
+            <Button
+              onClick={handleAdminLogin}
+              className="w-full h-12 bg-gray-600 hover:bg-gray-500 text-white font-bold uppercase tracking-wider gap-2 flex items-center justify-center"
+              data-testid="button-login-admin"
+            >
+              <Shield className="w-5 h-5" />
+              Admin Login
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
     </nav>
   );
 }
